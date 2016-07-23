@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Survey Page</title>
+     
+    
+	<!-- Latest compiled and minified CSS & JS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+	<div class="container">		
+		<div class="jumbotron">
+			<h1 class="text-center"><span class="glyphicon glyphicon-hand-right"></span> Find your Friends!! </h1>
+			<hr>
+		</div>
+	
+
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- User Info -->
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title"><strong>About You</strong></h4>
+					</div>
+					<div class="panel-body">
+
+						<form role="form">
+				
+							<div class="form-group">
+								<label for="">Name(Required)</label>
+								<input type="text" class="form-control" id="user_name">
+							</div>
+
+							<div class="form-group">
+								<label for="">Link to Photo Image (Required)</label>
+								<input type="text" class="form-control" id="user_image"></br>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+ <div class="row">
+	<div class="col-lg-12">
+ <!--- Questions -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			<h4 class="panel-title"><strong>Survey Questions</strong></h4>
+				</div>
+
+				<div class="panel-body">
+						<form role="form">	
+
+							<div class="form-group">
+							 <label for="">1.Do you enjoy going places your friends choose?</label>
+                                <select id="q1" class="form-control">
+		                            <option value="" selected hidden>Select an Option</option id=a1>
+		                            <option value="1">1 (strongly agree)</option>
+		                            <option value="2">2</option>
+		                            <option value="3">3</option>
+		                            <option value="4">4</option>
+		                            <option value="5">5 (strongly disagree)</option>
+                                </select>
+                            </div>
+							
+							<div class="form-group">
+								<label for="">2.Have you been known to talk a lot?</label>
+								<select id="q1" class="form-control">
+		                            <option value="" selected hidden>Select an Option</option id=a2>
+		                            <option value="1">1 (strongly agree)</option>
+		                            <option value="2">2</option>
+		                            <option value="3">3</option>
+		                            <option value="4">4</option>
+		                            <option value="5">5 (strongly disagree)</option>
+                            </select>
+							</div>
+
+							<div class="form-group">
+								<label for="">3.Do you get upset easily?</label>
+								<select id="q1" class="form-control">
+		                            <option value="" selected hidden>Select an Option</option id=a3>
+		                            <option value="1">1 (strongly agree)</option>
+		                            <option value="2">2</option>
+		                            <option value="3">3</option>
+		                            <option value="4">4</option>
+		                            <option value="5">5 (strongly disagree)</option>
+                            </select>
+							</div>
+
+							<div class="form-group">
+								<label for="">4.Are you a music lover?</label>
+								<select id="q1" class="form-control">
+		                            <option value="" selected hidden>Select an Option</option id=a4>
+		                            <option value="1">1 (strongly agree)</option>
+		                            <option value="2">2</option>
+		                            <option value="3">3</option>
+		                            <option value="4">4</option>
+		                            <option value="5">5 (strongly disagree)</option>
+                            </select>
+							</div>
+
+							<div class="form-group">
+								<label for="">5.Do you watch watch sports for hours at a time, as often as possible?</label>
+								<select id="q1" class="form-control">
+		                            <option value="" selected hidden>Select an Option</option id=a5>
+		                            <option value="1">1 (strongly agree)</option>
+		                            <option value="2">2</option>
+		                            <option value="3">3</option>
+		                            <option value="4">4</option>
+		                            <option value="5">5 (strongly disagree)</option>
+                            </select>
+							</div>
+
+							<button type="submit" class="btn btn-primary submit">Submit</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	    <footer class="footer">
+	      <div class="container">
+	        <p><a href="/api/friends">API Friends Link</a> | <a href="https://github.com/apexapatel11/FriendFinder">GitHub Repo</a></p>
+	      </div>
+	    </footer>
+
+	</div>
+	
+</body>
+</html>
+
+<!-- BELOW CODE HANDLES HOW FORM DATA IS SENT TO THE SERVER -->
+<script type="text/javascript">
+
+	// In this code below we create the Front-end Javascript which "POSTS" our form data to our express server.
+	// In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
+	// Our api recognizes the route (/api/friends)... and then runs the associated code (found in api-routes.js).
+	// In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file 
+
+	$(".submit").on("click", function(){
+		
+		// Here we grab the form elements
+		var userAnswers = {
+			name: $('#user_name').val().trim(),
+			image: $('#user_image').val().trim(),
+			scores: [
+			 $('#a1').val().trim(),
+			 $('#a2').val().trim(),
+			 $('#a3').val().trim(),
+			 $('#a4').val().trim(),
+			 $('#a5').val().trim()
+			] 
+			};
+              console.log("here"+userAnswers.scores);
+              alert("U r here");
+
+		// push the user info to the friends-data.js
+		// This line is the magic. It's very similar to the standard ajax function we used. 
+		// Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+		// The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+		// Here we get the location of the root page. 
+		// We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
+		var currentURL = window.location.origin;
+
+	    $.post(currentURL + "/api/friends", userAnswers,
+	    function(data){
+
+	    	// Clear the form when submitting
+    		$('#user_name').val("");
+			$('#user_image').val("");
+			$('#answer').val("");
+	    });
+return false;
+});
+</script>
